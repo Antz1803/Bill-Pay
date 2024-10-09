@@ -1,7 +1,5 @@
 ﻿namespace MancillaBillPay
-{
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	public partial class MainPage : ContentPage
 	{
 
@@ -161,9 +159,7 @@
 	}
   }
 
-=======
-=======
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd
+
     public partial class MainPage : ContentPage
     {
      
@@ -219,7 +215,3 @@
     }
 
 }
-<<<<<<< HEAD
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd
-=======
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd

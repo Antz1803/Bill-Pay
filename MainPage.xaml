@@ -124,8 +124,7 @@
             <Frame x:Name="AutomatedTip" BackgroundColor="{StaticResource DarkColor}" HeightRequest="350" WidthRequest="330" Margin="233,350,0,0">
                 <StackLayout Padding="10">
                     <Label Text="Enter your bill:" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     <Entry x:Name="txtBill" Placeholder="Enter Amount" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
                   
                     <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
@@ -138,9 +137,7 @@
                         <Label Text="Tip: " FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Label x:Name="lblTip"  Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Slider x:Name="sldTip"
-=======
-=======
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd
+
                     <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
                   
                     <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
@@ -153,10 +150,7 @@
                         <Label Text="Tip: " FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Label Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Slider
-<<<<<<< HEAD
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd
-=======
->>>>>>> f8cf492ef797c426361b307114774a3d035eccfd
+
                             MaximumTrackColor="Beige"
                             WidthRequest="236"/>
                     </HorizontalStackLayout>
