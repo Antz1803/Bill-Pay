@@ -94,19 +94,20 @@
                 <StackLayout>
                     <Label Text="Tip:" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
                     <Frame BackgroundColor="Transparent" BorderColor="Black" CornerRadius="5" Padding="5" HeightRequest="49" Margin="0,9,0,0">
-                        <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="Black"/>
+                        <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="Black" Completed="txtBill_Completed"/>
                     </Frame>
-                        <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
+                    <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
                     <HorizontalStackLayout Margin="0,9,0,0" Spacing="5">
                         <Button Text="-" FontSize="70" Padding="-18,-50,-18,-35" Clicked="OnDecrementClicked"/>
-                            <Label x:Name="PersonCountLabelOne" Text="0" TextColor="Black" FontSize="35" VerticalOptions="Center" />
+                        <Label x:Name="PersonCountLabelOne" Text="0" TextColor="Black" FontSize="35" VerticalOptions="Center" />
                         <Button Text="+" FontSize="50" Padding="-18,-37,-18,-35" Clicked="OnIncrementClicked"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Frame>
-                  
+
         </Grid>
-        <!--Automated Tip-->
+        
+        <!--Automated Tip-->       
         <Grid
          Grid.Row="1"
          Margin="0,15,0,0">
@@ -121,12 +122,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Frame x:Name="AutomatedTip" BackgroundColor="{StaticResource DarkColor}" HeightRequest="350" WidthRequest="330" Margin="233,350,0,0">
-                <StackLayout Padding="10">
-                    <Label Text="Enter your bill:" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
 
-                    <Entry x:Name="txtBill" Placeholder="Enter Amount" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
-                  
+
+            <Grid x:Name="AutomatedTip" HeightRequest="350" WidthRequest="330" Margin="233,350,0,0">
+                <Image Source="bgone.jpeg" 
+Aspect="AspectFill" 
+HorizontalOptions="FillAndExpand" 
+VerticalOptions="FillAndExpand"/>
+                <StackLayout Padding="10">
+
+                    <Label Text="Enter your bill:" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+                    <Entry x:Name="txtBill" Placeholder="Enter Amount" Completed="txtBill_Completed" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
+
                     <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
                         <Label Text="Choose your Tip:" FontSize="15" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center"/>
                         <Button Text="10%" Padding="10" Clicked="btnTips1_Clicked"/>
@@ -134,36 +141,23 @@
                         <Button Text="20%" Padding="10" Clicked="btnTips3_Clicked"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="0,25,0,0">
-                        <Label Text="Tip: " FontSize="15" TextColor="Black" FontAttributes="Bold"/>
-                        <Label x:Name="lblTip"  Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
+                        <Label FontSize="15" TextColor="Black" FontAttributes="Bold"/>
+                        <Label x:Name="lblTip" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Slider x:Name="sldTip"
-
-                    <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
-                  
-                    <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
-                        <Label Text="Choose your Tip:" FontSize="15" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center"/>
-                        <Button Text="10%" Padding="10"/>
-                        <Button Text="15%" Padding="10"/>
-                        <Button Text="20%" Padding="10"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Margin="0,25,0,0">
-                        <Label Text="Tip: " FontSize="15" TextColor="Black" FontAttributes="Bold"/>
-                        <Label Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
-                        <Slider
-
                             MaximumTrackColor="Beige"
-                            WidthRequest="236"/>
+                            WidthRequest="236"
+                                ValueChanged="sldTip_ValueChanged"/>
                     </HorizontalStackLayout>
-                    
+
                     <HorizontalStackLayout Margin="0,25,0,0" Spacing="6">
-                    <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="17" VerticalOptions="Center"/>
+                        <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="17" VerticalOptions="Center"/>
                         <Button Text="-" FontSize="60" Padding="-18,-50,-18,-39" HeightRequest="35" WidthRequest="35" Clicked="OnDecrementClickedOne"/>
                         <Label x:Name="PersonCountLabelTwo" Text="0" TextColor="Black" FontSize="40" VerticalOptions="Center" />
                         <Button Text="+" FontSize="40" Padding="-18,-37,-18,-35" HeightRequest="35" WidthRequest="35" Clicked="OnIncrementClickedOne"/>
                     </HorizontalStackLayout>
                 </StackLayout>
-            </Frame>
-
+            </Grid>
         </Grid>
     </Grid>
+
 </ContentPage>
