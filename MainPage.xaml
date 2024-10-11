@@ -71,64 +71,68 @@
             </Grid>
         </Frame>
         <!--Customize Tip-->
-        <HorizontalStackLayout Spacing="10" Margin="0,0,0,-260">
+        <HorizontalStackLayout Spacing="10" Margin="0,0,0,-280">
             <Button Text="Automated Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnAutomated"/>
             <Button Text="Customize Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnCustomize"/>
         </HorizontalStackLayout>
-        <Grid
-                Grid.Row="1"
-                Margin="0,15,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*"/>
-                <ColumnDefinition Width=".7*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
-            <Frame x:Name="CustomizeTip" BackgroundColor="{StaticResource DarkColor}" HeightRequest="350" WidthRequest="330" Margin="233,350,0,0">
+        <Frame x:Name="CustomizeTip" HeightRequest="400" WidthRequest="340" Margin="0,755,0,0" Background="Transparent" CornerRadius="105" BorderColor="Wheat" IsVisible="False">
+            <Grid>
+                <Image Source="bgtwo.jpeg" Aspect="AspectFill" Opacity="0.9"/>
                 <StackLayout>
-                    <Label Text="Tip:" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
-                    <Frame BackgroundColor="Transparent" BorderColor="Black" CornerRadius="5" Padding="5" HeightRequest="49" Margin="0,9,0,0">
-                        <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="Black" Completed="txtBill_Completed"/>
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
+                    <Label Text="  Tip:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20"/>
+                    <Frame BackgroundColor="Transparent" BorderColor="WhiteSmoke" CornerRadius="5" Padding="5" HeightRequest="49" WidthRequest="270" Margin="0,9,0,0">
+                        <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="WhiteSmoke" Completed="txtBill_Completed"/>
                     </Frame>
-                    <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
-                    <HorizontalStackLayout Margin="0,9,0,0" Spacing="5">
-                        <Button Text="-" FontSize="70" Padding="-18,-50,-18,-35" Clicked="OnDecrementClicked"/>
-                        <Label x:Name="PersonCountLabelOne" Text="0" TextColor="Black" FontSize="35" VerticalOptions="Center" />
-                        <Button Text="+" FontSize="50" Padding="-18,-37,-18,-35" Clicked="OnIncrementClicked"/>
+                    <Label Text="  Number of persons:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
+                    <HorizontalStackLayout Margin="13,9,0,0">
+                        <Button Text="-" FontSize="70" Padding="-18,-50,-18,-35" HeightRequest="40" Clicked="OnDecrementClicked" BackgroundColor="Wheat"/>
+                        <Entry x:Name="PersonCountLabelOne" 
+                               Text="0" 
+                               TextColor="WhiteSmoke"                      
+                               Opacity="0.9"
+                               Keyboard="Numeric"
+                               FontSize="35" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="CenterAndExpand" 
+                               HorizontalTextAlignment="Center" />
+                        <Button Text="+" FontSize="50" Padding="-18,-37,-18,-35" HeightRequest="40" Clicked="OnIncrementClicked" BackgroundColor="Wheat"/>
                     </HorizontalStackLayout>
                 </StackLayout>
-            </Frame>
+            </Grid>
+        </Frame>
 
-        </Grid>
-        
-        <!--Automated Tip-->       
-        <Grid
-         Grid.Row="1"
-         Margin="0,15,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*"/>
-                <ColumnDefinition Width=".7*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid x:Name="AutomatedTip" HeightRequest="350" WidthRequest="330" Margin="233,350,0,0">
-                <Image Source="bgone.jpeg" 
-Aspect="AspectFill" 
-HorizontalOptions="FillAndExpand" 
-VerticalOptions="FillAndExpand"/>
+        <!--Automated Tip-->
+        <Frame x:Name="AutomatedTip" HeightRequest="400" WidthRequest="340" Margin="0,755,0,0" Background="Transparent" CornerRadius="105" BorderColor="#34a0a4">
+            <Grid>
+                <Image Source="bgone.jpeg" Aspect="AspectFill" Opacity="0.9"/>
                 <StackLayout Padding="10">
-
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
+                    <Label>
+                        <!--Break Line hehehe-->
+                    </Label>
                     <Label Text="Enter your bill:" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
-                    <Entry x:Name="txtBill" Placeholder="Enter Amount" Completed="txtBill_Completed" Keyboard="Numeric" TextColor="White"  WidthRequest="280" Margin="5,0,0,0"/>
+                    <Entry x:Name="txtBill" 
+                   Placeholder="Enter Amount" 
+                   Completed="txtBill_Completed" 
+                   Keyboard="Numeric" 
+                   TextColor="Black" 
+                   WidthRequest="280" 
+                   Margin="5,0,0,0"/>
 
                     <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
                         <Label Text="Choose your Tip:" FontSize="15" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center"/>
@@ -136,24 +140,28 @@ VerticalOptions="FillAndExpand"/>
                         <Button Text="15%" Padding="10" Clicked="btnTips2_Clicked"/>
                         <Button Text="20%" Padding="10" Clicked="btnTips3_Clicked"/>
                     </HorizontalStackLayout>
+
                     <HorizontalStackLayout Margin="0,25,0,0">
-                        <Label FontSize="15" TextColor="Black" FontAttributes="Bold"/>
-                        <Label x:Name="lblTip" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
-                        <Slider x:Name="sldTip"
-                            MaximumTrackColor="Beige"
-                            WidthRequest="236"
-                                ValueChanged="sldTip_ValueChanged"/>
+                        <Label Text="Tip: " FontSize="15" TextColor="Black" FontAttributes="Bold"/>
+                        <Label x:Name="lblTip" Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
+                        <Slider x:Name="sldTip"                   
+                        Minimum="0"
+                        Maximum="50"
+                        WidthRequest="245"
+                        ValueChanged="sldTip_ValueChanged"
+                        MaximumTrackColor="Beige"/>
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Margin="0,25,0,0" Spacing="6">
                         <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="17" VerticalOptions="Center"/>
-                        <Button Text="-" FontSize="60" Padding="-18,-50,-18,-39" HeightRequest="35" WidthRequest="35" Clicked="OnDecrementClickedOne"/>
+                        <Button Text="-" FontSize="40" Padding="-18,-50,-18,-39" HeightRequest="35" WidthRequest="35" Clicked="OnDecrementClickedOne"/>
                         <Label x:Name="PersonCountLabelTwo" Text="0" TextColor="Black" FontSize="40" VerticalOptions="Center" />
                         <Button Text="+" FontSize="40" Padding="-18,-37,-18,-35" HeightRequest="35" WidthRequest="35" Clicked="OnIncrementClickedOne"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Grid>
-        </Grid>
+        </Frame>
+
     </Grid>
 
 </ContentPage>
