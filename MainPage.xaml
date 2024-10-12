@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MancillaBillPay.MainPage">
+             x:Class="MancillaBillPay.MainPage"
+             BackgroundImageSource="bghall.png">
 
     <ContentPage.Resources>
-        <Color x:Key="SectionColor">#444444</Color>
+        <Color x:Key="SectionColor">#00b4d8</Color>
         <Color x:Key="LightFont">#d6d6d6</Color>
         <Color x:Key="DarkColor">DarkSlateGray</Color>
     </ContentPage.Resources>
@@ -14,9 +15,9 @@
             <RowDefinition Height=".3*"/>
             <RowDefinition Height=".7*"/>
         </Grid.RowDefinitions>
-        <Frame Padding="10"
-               BackgroundColor="{StaticResource SectionColor}"
-               BorderColor="Transparent">
+        <Frame Padding="10"  
+               BackgroundColor="Transparent"
+               BorderColor="{StaticResource SectionColor}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -39,8 +40,8 @@
                     Grid.Row="1"
                     FontAttributes="Bold"
                     FontSize="35"
+                    Text="₱0.00"
                     HorizontalTextAlignment="Center"
-                    Text="P0.00"
                     TextColor="{StaticResource LightFont}" VerticalOptions="CenterAndExpand"/>
                 <BoxView
                     Grid.Row="1"
@@ -55,17 +56,19 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Label
-                    Text="SUBTOTAL"
+                    Text="SUBTOTAL:"
                     TextColor="{StaticResource LightFont}"/>
                     <Label
                     x:Name="lblSubtotal"
                     FontAttributes="Bold"
-                    Text="P0.00"
                     TextColor="{StaticResource LightFont}"/>
+                    <Label
+                    Margin="0,0,0,0"
+                    Text="TIP:"
+                    TextColor="{StaticResource LightFont}"/>    
                     <Label
                     x:Name="lblTipPerPerson"
                     Margin="0,10,0,0"
-                    Text="TIP"
                     TextColor="{StaticResource LightFont}"/>
                 </VerticalStackLayout>
             </Grid>
@@ -78,7 +81,7 @@
 
         <Frame x:Name="CustomizeTip" HeightRequest="400" WidthRequest="340" Margin="0,755,0,0" Background="Transparent" CornerRadius="105" BorderColor="Wheat" IsVisible="False">
             <Grid>
-                <Image Source="bgtwo.jpeg" Aspect="AspectFill" Opacity="0.9"/>
+                <Image Source="bgtwo.jpeg" Aspect="AspectFill" Opacity="0.7"/>
                 <StackLayout>
                     <Label>
                         <!--Break Line hehehe-->
@@ -86,21 +89,19 @@
                     <Label>
                         <!--Break Line hehehe-->
                     </Label>
-                    <Label>
-                        <!--Break Line hehehe-->
-                    </Label>
-                    <Label>
-                        <!--Break Line hehehe-->
-                    </Label>
-                    <Label Text="  Tip:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="   Enter your bill:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20"/>
                     <Frame BackgroundColor="Transparent" BorderColor="WhiteSmoke" CornerRadius="5" Padding="5" HeightRequest="49" WidthRequest="270" Margin="0,9,0,0">
-                        <Entry Placeholder="Enter Amount" Keyboard="Numeric" TextColor="WhiteSmoke" Completed="txtBill_Completed"/>
+                        <Entry x:Name="txtBillone" Placeholder="Enter Amount" Keyboard="Numeric" TextColor="WhiteSmoke" Completed="txtbillOne_Completed"/>
                     </Frame>
-                    <Label Text="  Number of persons:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
+                    <Label Text="   Tip:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20" Margin="0,5,0,0"/>
+                    <Frame BackgroundColor="Transparent" BorderColor="WhiteSmoke" CornerRadius="5" Padding="5" HeightRequest="49" WidthRequest="270" Margin="0,9,0,0">
+                        <Entry x:Name="TipCustomizes" Placeholder="Enter Amount" Keyboard="Numeric" TextColor="WhiteSmoke" Completed="tipsCustomizes_Completed"/>
+                    </Frame>
+                    <Label Text="   Number of persons:" TextColor="WhiteSmoke" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,9,0,0"/>
                     <HorizontalStackLayout Margin="13,9,0,0">
                         <Button Text="-" FontSize="70" Padding="-18,-50,-18,-35" HeightRequest="40" Clicked="OnDecrementClicked" BackgroundColor="Wheat"/>
                         <Entry x:Name="PersonCountLabelOne" 
-                               Text="0" 
+                               Text="1" 
                                TextColor="WhiteSmoke"                      
                                Opacity="0.9"
                                Keyboard="Numeric"
@@ -117,7 +118,7 @@
         <!--Automated Tip-->
         <Frame x:Name="AutomatedTip" HeightRequest="400" WidthRequest="340" Margin="0,755,0,0" Background="Transparent" CornerRadius="105" BorderColor="#34a0a4">
             <Grid>
-                <Image Source="bgone.jpeg" Aspect="AspectFill" Opacity="0.9"/>
+                <Image Source="bgone.jpeg" Aspect="AspectFill" Opacity="0.7"/>
                 <StackLayout Padding="10">
                     <Label>
                         <!--Break Line hehehe-->
@@ -126,9 +127,9 @@
                         <!--Break Line hehehe-->
                     </Label>
                     <Label Text="Enter your bill:" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
-                    <Entry x:Name="txtBill" 
+                    <Entry x:Name="txtBilltwo" 
                    Placeholder="Enter Amount" 
-                   Completed="txtBill_Completed" 
+                   Completed="txtBilltwo_Completed" 
                    Keyboard="Numeric" 
                    TextColor="Black" 
                    WidthRequest="280" 
@@ -136,9 +137,9 @@
 
                     <HorizontalStackLayout Spacing="4" Margin="0,25,0,0">
                         <Label Text="Choose your Tip:" FontSize="15" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center"/>
-                        <Button Text="10%" Padding="10" Clicked="btnTips1_Clicked"/>
-                        <Button Text="15%" Padding="10" Clicked="btnTips2_Clicked"/>
-                        <Button Text="20%" Padding="10" Clicked="btnTips3_Clicked"/>
+                        <Button Text="10%" Padding="10" Clicked="btnTips1_Clicked" BackgroundColor="#34a0a4"/>
+                        <Button Text="15%" Padding="10" Clicked="btnTips2_Clicked" BackgroundColor="#34a0a4"/>
+                        <Button Text="20%" Padding="10" Clicked="btnTips3_Clicked" BackgroundColor="#34a0a4"/>
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Margin="0,25,0,0">
@@ -152,11 +153,20 @@
                         MaximumTrackColor="Beige"/>
                     </HorizontalStackLayout>
 
-                    <HorizontalStackLayout Margin="0,25,0,0" Spacing="6">
+                    <HorizontalStackLayout Margin="0,25,0,0" Spacing="1">
                         <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="17" VerticalOptions="Center"/>
-                        <Button Text="-" FontSize="40" Padding="-18,-50,-18,-39" HeightRequest="35" WidthRequest="35" Clicked="OnDecrementClickedOne"/>
-                        <Label x:Name="PersonCountLabelTwo" Text="0" TextColor="Black" FontSize="40" VerticalOptions="Center" />
-                        <Button Text="+" FontSize="40" Padding="-18,-37,-18,-35" HeightRequest="35" WidthRequest="35" Clicked="OnIncrementClickedOne"/>
+                            <Button Text="-" FontSize="60" Padding="-18,-45,-18,-35" HeightRequest="30" Clicked="OnDecrementClicked" BackgroundColor="#34a0a4"/>
+                            <Entry x:Name="PersonCountLabelTwo" 
+                                   Text="1" 
+                                   TextColor="Black"                      
+                                   Opacity="0.9"
+                                   Keyboard="Numeric"
+                                   FontSize="25" 
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="CenterAndExpand" 
+                                   HorizontalTextAlignment="Center" />
+                        <Button Text="+" FontSize="40" Padding="-18,-39,-18,-35" HeightRequest="30" Clicked="OnIncrementClicked" BackgroundColor="#34a0a4"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Grid>
