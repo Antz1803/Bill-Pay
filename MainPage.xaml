@@ -63,12 +63,12 @@
                     FontAttributes="Bold"
                     TextColor="{StaticResource LightFont}"/>
                     <Label
-                    Margin="0,0,0,0"
+                    Margin="0,10,0,0"
                     Text="TIP:"
                     TextColor="{StaticResource LightFont}"/>    
                     <Label
                     x:Name="lblTipPerPerson"
-                    Margin="0,10,0,0"
+                    Margin="0,-2,0,0"
                     TextColor="{StaticResource LightFont}"/>
                 </VerticalStackLayout>
             </Grid>
@@ -154,8 +154,8 @@
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Margin="0,25,0,0" Spacing="1">
-                        <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="17" VerticalOptions="Center"/>
-                            <Button Text="-" FontSize="60" Padding="-18,-45,-18,-35" HeightRequest="30" Clicked="OnDecrementClicked" BackgroundColor="#34a0a4"/>
+                        <Label Text="Number of persons:" TextColor="Black" FontAttributes="Bold" FontSize="16" VerticalOptions="Center"/>
+                            <Button Text="-" FontSize="60" Padding="-18,-45,-18,-35" HeightRequest="30" Clicked="OnDecrementClickedTwo" BackgroundColor="#34a0a4"/>
                             <Entry x:Name="PersonCountLabelTwo" 
                                    Text="1" 
                                    TextColor="Black"                      
@@ -165,8 +165,9 @@
                                    FontAttributes="Bold"
                                    VerticalOptions="Center" 
                                    HorizontalOptions="CenterAndExpand" 
-                                   HorizontalTextAlignment="Center" />
-                        <Button Text="+" FontSize="40" Padding="-18,-39,-18,-35" HeightRequest="30" Clicked="OnIncrementClicked" BackgroundColor="#34a0a4"/>
+                                   HorizontalTextAlignment="Center" 
+                                   Completed="PersonCountLabelTwo_Completed"/>
+                        <Button Text="+" FontSize="40" Padding="-18,-39,-18,-35" HeightRequest="30" Clicked="OnIncrementClickedTwo" BackgroundColor="#34a0a4"/>
                     </HorizontalStackLayout>
                 </StackLayout>
             </Grid>
