@@ -7,7 +7,7 @@
     <ContentPage.Resources>
         <Color x:Key="SectionColor">#00b4d8</Color>
         <Color x:Key="LightFont">#d6d6d6</Color>
-        <Color x:Key="DarkColor">DarkSlateGray</Color>
+        <Color x:Key="DarkFont">wheat</Color>
     </ContentPage.Resources>
 
     <Grid Margin="15">
@@ -70,6 +70,12 @@
                     x:Name="lblTipPerPerson"
                     Margin="0,-2,0,0"
                     TextColor="{StaticResource LightFont}"/>
+                    <Label Margin="0,10,0,0"
+                           Text="Share Tip Person:"
+TextColor="{StaticResource LightFont}"/>
+                    <Label x:Name="SharePerson"
+                           Margin="0,-2,0,0"
+TextColor="{StaticResource LightFont}"/>
                 </VerticalStackLayout>
             </Grid>
         </Frame>
