@@ -10,54 +10,132 @@
         }
 
 
-        double Bill, BillPer, SubTotal, TipAmount, TipAmountPer;
+        double Bill, BillPer, CurrentBill, TipAmount, TipAmountPer;
+
+        #region Customize Calculation
         private int personCountOne = 1;
         private void txtbillOne_Completed(object sender, EventArgs e)
         {
-            UpdateBillCalculations();
+            TipAmount = 0;
+            TipAmountPer = 0;
+            personCountOne = 1;
+            PersonCountLabelOne.Text = personCountTwo.ToString();
+
+            Bill = Convert.ToDouble(txtBillone.Text);
+            double customTip = 0;
+            if (double.TryParse(TipCustomizes.Text, out customTip))
+            {
+                TipAmount = customTip / 100; // Convert percentage to decimal
+            }
+            else
+            {
+                TipAmount = 0; // Default to 0 if input is invalid
+            }
+            TipAmountPer = Bill * TipAmount;
+            CurrentBill = (Bill / personCountTwo);
+            BillPer = CurrentBill;
+
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
+            lblCurentBill.Text = $"₱{CurrentBill.ToString("n2")}";
+            lblTotal.Text = $"₱{BillPer.ToString("n2")}";
+
         }
 
         private void tipsCustomizes_Completed(object sender, EventArgs e)
         {
-            UpdateBillCalculations();
-        }
+            double customTip = 0;
+            if (double.TryParse(TipCustomizes.Text, out customTip))
+            {
+                TipAmount = customTip / 100; // Convert percentage to decimal
+            }
+            else
+            {
+                TipAmount = 0; // Default to 0 if input is invalid
+            }
+            TipAmountPer = (Bill / personCountOne) * TipAmount;
+            CurrentBill = TipAmount / personCountOne;
+            BillPer = TipAmountPer + Bill;
 
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
+
+            lblTotal.Text = $"₱{BillPer.ToString("n2")}";
+
+        }
         // This method updates bill calculations based on the current values
         private void UpdateBillCalculations()
         {
-            if (personCountOne > 0 && double.TryParse(txtBillone.Text, out Bill) && double.TryParse(TipCustomizes.Text, out double customTip))
+            // Ensure personCount is greater than zero to avoid division by zero
+            if (personCountOne > 0)
             {
-                TipAmount = customTip / 100;
-                TipAmountPer = (Bill * TipAmount) / personCountOne;
-                SubTotal = Bill / personCountOne;
-                BillPer = TipAmountPer + SubTotal;
+                double customTip = 0;
 
-                lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
-                lblSubtotal.Text = $"₱{SubTotal.ToString("n2")}";
-                lblTotal.Text = $"₱{BillPer.ToString("n2")}";
+                // Validate custom tip input
+                if (double.TryParse(TipCustomizes.Text, out customTip))
+                {
+                    TipAmount = customTip / 100; // Convert percentage to decimal
+                }
+                else
+                {
+                    TipAmount = 0; // Default to 0 if input is invalid
+                }
+
+                double tipAmountPer = Bill * TipAmount;
+                double totalBill = Bill + tipAmountPer;
+
+                // Validate person count for sharing calculations
+                if (double.TryParse(PersonCountLabelOne.Text, out double personCount) && personCount > 0)
+                {
+                    SharePerson.Text = $"₱{(totalBill / personCount).ToString("N2")}";
+                }
+                else
+                {
+                    SharePerson.Text = "₱0.00"; // Default value if person count is invalid
+                }
+
+                // Update the UI labels with the calculated amounts
+                lblTipPerPerson.Text = $"₱{tipAmountPer.ToString("n2")}";
+                lblTotal.Text = $"₱{totalBill.ToString("n2")}";
             }
+        
         }
 
         private void OnIncrementClicked(object sender, EventArgs e)
         {
+            // Try to parse the current person count from the Entry
             if (int.TryParse(PersonCountLabelOne.Text, out personCountOne))
             {
-                personCountOne++;
-                PersonCountLabelOne.Text = personCountOne.ToString();
-                UpdateBillCalculations();
+                personCountOne++; // Increment the count
+                PersonCountLabelOne.Text = personCountOne.ToString(); // Update the Entry
+                UpdateBillCalculations(); // Update calculations here after incrementing
             }
         }
 
         private void OnDecrementClicked(object sender, EventArgs e)
         {
-            if (int.TryParse(PersonCountLabelOne.Text, out personCountOne) && personCountOne > 1) // Ensure at least one person
+            // Try to parse the current person count from the Entry
+            if (int.TryParse(PersonCountLabelOne.Text, out personCountOne) && personCountOne > 0)
             {
-                personCountOne--;
-                PersonCountLabelOne.Text = personCountOne.ToString();
-                UpdateBillCalculations();
+                personCountOne--; // Decrement the count
+                PersonCountLabelOne.Text = personCountOne.ToString(); // Update the Entry
+                UpdateBillCalculationsTwo(); // Update calculations here after decrementing
             }
         }
 
+        private void PersonCountLabelOne_Completed(object sender, EventArgs e)
+        {
+            if (int.TryParse(PersonCountLabelOne.Text, out int newCount) && newCount > 1)
+            {
+                personCountOne = newCount; // Update the person count
+                UpdateBillCalculations(); // Update calculations based on new count
+            }
+            else
+            {
+                PersonCountLabelOne.Text = personCountOne.ToString(); // Reset to previous valid value
+            }
+        }
+        #endregion
 
         #region Button can navigate the Customize Tip and Automated Tip
         private void OnCustomize(object sender, EventArgs e)
@@ -65,13 +143,14 @@
             CustomizeTip.IsVisible = true;
             AutomatedTip.IsVisible = false;
 
+            SharePerson.Text = "₱0.00";
             txtBillone.Text = null;
             txtBilltwo.Text = null;
             TipCustomizes.Text = null;
             sldTip.Value = 0;
-            lblTipPerPerson.Text = null;
-            lblSubtotal.Text = null;
-            lblTotal.Text = null;
+            lblTipPerPerson.Text = "₱0.00";
+            lblCurentBill.Text = "₱0.00";
+            lblTotal.Text = "₱0.00";
             PersonCountLabelOne.Text = (1).ToString();
         }
 
@@ -80,30 +159,36 @@
             AutomatedTip.IsVisible = true;
             CustomizeTip.IsVisible = false;
 
+            SharePerson.Text = "₱0.00";
             txtBillone.Text = null;
             txtBilltwo.Text = null;
+            TipCustomizes.Text = null;
             sldTip.Value = 0;
-            lblTipPerPerson.Text = null;
-            lblSubtotal.Text = null;
-            lblTotal.Text = null;
+            lblTipPerPerson.Text = "₱0.00";
+            lblCurentBill.Text = "₱0.00";
+            lblTotal.Text = "₱0.00";
             PersonCountLabelTwo.Text = (1).ToString();
         }
         #endregion
 
-
         #region Automated calculation
-
         private void txtBilltwo_Completed(object sender, EventArgs e)
         {
+            sldTip.Value = 0;
+            TipAmount = 0;
+            TipAmountPer = 0;
+            personCountTwo = 1;
+            PersonCountLabelTwo.Text = personCountTwo.ToString();
+
             Bill = Convert.ToDouble(txtBilltwo.Text);
             TipAmount = sldTip.Value / 100;
             TipAmountPer = Bill * TipAmount;
-            SubTotal = (Bill / personCountTwo);
-            BillPer = SubTotal;
+            CurrentBill = (Bill / personCountTwo);
+            BillPer = CurrentBill;
 
             SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
-            lblSubtotal.Text = $"₱{SubTotal.ToString("n2")}";
+            lblCurentBill.Text = $"₱{CurrentBill.ToString("n2")}";
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
         }
 
@@ -112,12 +197,12 @@
             TipAmountPer = Convert.ToInt32(sldTip.Value);
             TipAmount = sldTip.Value / 100;
             TipAmountPer = Bill * TipAmount;
-       
+
             BillPer = TipAmountPer + Bill;
             SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTip.Text = $"{Convert.ToInt32(sldTip.Value)}%";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
-          
+
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
         }
 
@@ -126,12 +211,12 @@
             sldTip.Value = 10;
             TipAmount = sldTip.Value / 100;
             TipAmountPer = (Bill / personCountTwo) * TipAmount;
-            SubTotal = TipAmount / personCountTwo;
+            CurrentBill = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
             SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
-         
+
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
         }
 
@@ -140,7 +225,7 @@
             sldTip.Value = 15;
             TipAmount = sldTip.Value / 100;
             TipAmountPer = Bill * TipAmount;
-            SubTotal = TipAmount / personCountTwo;
+            CurrentBill = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
             SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
@@ -154,7 +239,7 @@
             sldTip.Value = 20;
             TipAmount = sldTip.Value / 100;
             TipAmountPer = Bill * TipAmount;
-         SubTotal = TipAmount / personCountTwo;
+            CurrentBill = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
             SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
@@ -193,7 +278,7 @@
             // Ensure personCount is greater than zero to avoid division by zero
             if (personCountTwo > 0)
             {
-                double tipAmount = sldTip.Value / 100; 
+                double tipAmount = sldTip.Value / 100;
                 double tipAmountPer = Bill * tipAmount;
                 double billPer = tipAmountPer + Bill;
 

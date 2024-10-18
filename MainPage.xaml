@@ -56,10 +56,10 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Label
-                    Text="SUBTOTAL:"
+                    Text="Current Bill:"
                     TextColor="{StaticResource LightFont}"/>
                     <Label
-                    x:Name="lblSubtotal"
+                    x:Name="lblCurentBill"
                     FontAttributes="Bold"
                     TextColor="{StaticResource LightFont}"/>
                     <Label
@@ -81,8 +81,8 @@ TextColor="{StaticResource LightFont}"/>
         </Frame>
         <!--Customize Tip-->
         <HorizontalStackLayout Spacing="10" Margin="0,0,0,-280">
-            <Button Text="Automated Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnAutomated"/>
-            <Button Text="Customize Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnCustomize"/>
+            <Button Text="Automated Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnAutomated" BackgroundColor="{StaticResource SectionColor}"/>
+            <Button Text="Customize Tip" HeightRequest="45" FontAttributes="Bold" Clicked="OnCustomize" BackgroundColor="{StaticResource SectionColor}"/>
         </HorizontalStackLayout>
 
         <Frame x:Name="CustomizeTip" HeightRequest="400" WidthRequest="340" Margin="0,755,0,0" Background="Transparent" CornerRadius="105" BorderColor="Wheat" IsVisible="False">
@@ -114,7 +114,8 @@ TextColor="{StaticResource LightFont}"/>
                                FontSize="35" 
                                VerticalOptions="Center" 
                                HorizontalOptions="CenterAndExpand" 
-                               HorizontalTextAlignment="Center" />
+                               HorizontalTextAlignment="Center"
+                               Completed="PersonCountLabelOne_Completed"/>
                         <Button Text="+" FontSize="50" Padding="-18,-37,-18,-35" HeightRequest="40" Clicked="OnIncrementClicked" BackgroundColor="Wheat"/>
                     </HorizontalStackLayout>
                 </StackLayout>
@@ -153,8 +154,8 @@ TextColor="{StaticResource LightFont}"/>
                         <Label x:Name="lblTip" Text="0%" FontSize="15" TextColor="Black" FontAttributes="Bold"/>
                         <Slider x:Name="sldTip"                   
                         Minimum="0"
-                        Maximum="50"
-                        WidthRequest="245"
+                        Maximum="100"
+                        WidthRequest="238"
                         ValueChanged="sldTip_ValueChanged"
                         MaximumTrackColor="Beige"/>
                     </HorizontalStackLayout>
