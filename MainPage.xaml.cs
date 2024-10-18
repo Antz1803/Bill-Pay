@@ -100,8 +100,8 @@
             TipAmountPer = Bill * TipAmount;
             SubTotal = (Bill / personCountTwo);
             BillPer = SubTotal;
-            SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
-            
+
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
             lblSubtotal.Text = $"₱{SubTotal.ToString("n2")}";
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -114,7 +114,7 @@
             TipAmountPer = Bill * TipAmount;
        
             BillPer = TipAmountPer + Bill;
-            SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTip.Text = $"{Convert.ToInt32(sldTip.Value)}%";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
           
@@ -129,7 +129,7 @@
             SubTotal = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
-            SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
          
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -143,7 +143,7 @@
             SubTotal = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
-            SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
 
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -157,7 +157,7 @@
          SubTotal = TipAmount / personCountTwo;
             BillPer = TipAmountPer + Bill;
 
-            SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
 
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -199,7 +199,7 @@
 
                 // Update the UI labels with the calculated amounts
                 lblTipPerPerson.Text = $"₱{tipAmountPer.ToString("n2")}";
-                SharePerson.Text = $"₱{(Bill / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+                SharePerson.Text = $"₱{((Bill + tipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
                 lblTotal.Text = $"₱{billPer.ToString("n2")}";
             }
         }
