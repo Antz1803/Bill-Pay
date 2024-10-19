@@ -19,7 +19,7 @@
             TipAmount = 0;
             TipAmountPer = 0;
             personCountOne = 1;
-            PersonCountLabelOne.Text = personCountTwo.ToString();
+            PersonCountLabelOne.Text = personCountOne.ToString();
 
             Bill = Convert.ToDouble(txtBillone.Text);
             double customTip = 0;
@@ -32,10 +32,10 @@
                 TipAmount = 0; // Default to 0 if input is invalid
             }
             TipAmountPer = Bill * TipAmount;
-            CurrentBill = (Bill / personCountTwo);
+            CurrentBill = (Bill / personCountOne);
             BillPer = CurrentBill;
 
-            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelOne.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
             lblCurentBill.Text = $"₱{CurrentBill.ToString("n2")}";
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -57,7 +57,7 @@
             CurrentBill = TipAmount / personCountOne;
             BillPer = TipAmountPer + Bill;
 
-            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelTwo.Text)).ToString("N2")}";
+            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelOne.Text)).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
 
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
@@ -140,34 +140,40 @@
         #region Button can navigate the Customize Tip and Automated Tip
         private void OnCustomize(object sender, EventArgs e)
         {
-            CustomizeTip.IsVisible = true;
-            AutomatedTip.IsVisible = false;
+                CustomizeTip.IsVisible = true;
+                AutomatedTip.IsVisible = false;
 
             SharePerson.Text = "₱0.00";
             txtBillone.Text = null;
-            txtBilltwo.Text = null;
             TipCustomizes.Text = null;
-            sldTip.Value = 0;
             lblTipPerPerson.Text = "₱0.00";
             lblCurentBill.Text = "₱0.00";
             lblTotal.Text = "₱0.00";
             PersonCountLabelOne.Text = (1).ToString();
-        }
+         
+            }
 
         private void OnAutomated(object sender, EventArgs e)
         {
             AutomatedTip.IsVisible = true;
             CustomizeTip.IsVisible = false;
 
+            // Reset all values to default
             SharePerson.Text = "₱0.00";
-            txtBillone.Text = null;
             txtBilltwo.Text = null;
-            TipCustomizes.Text = null;
             sldTip.Value = 0;
             lblTipPerPerson.Text = "₱0.00";
             lblCurentBill.Text = "₱0.00";
             lblTotal.Text = "₱0.00";
-            PersonCountLabelTwo.Text = (1).ToString();
+            personCountOne = 1; // Reset person count
+            PersonCountLabelTwo.Text = personCountOne.ToString();
+
+            Bill = 0;
+            TipAmount = 0;
+            TipAmountPer = 0;
+
+            // Ensure any calculations that rely on these values are reset
+            UpdateBillCalculationsTwo();
         }
         #endregion
 
