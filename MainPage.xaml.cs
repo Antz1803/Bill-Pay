@@ -25,13 +25,13 @@
             double customTip = 0;
             if (double.TryParse(TipCustomizes.Text, out customTip))
             {
-                TipAmount = customTip / 100; // Convert percentage to decimal
+                TipAmount = customTip; 
             }
             else
             {
                 TipAmount = 0; // Default to 0 if input is invalid
             }
-            TipAmountPer = Bill * TipAmount;
+            TipAmountPer = Bill + TipAmount;
             CurrentBill = (Bill / personCountOne);
             BillPer = CurrentBill;
 
