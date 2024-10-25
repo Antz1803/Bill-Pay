@@ -16,73 +16,76 @@
         private int personCountOne = 1;
         private void txtbillOne_Completed(object sender, EventArgs e)
         {
+            // Reset values
             TipAmount = 0;
-            TipAmountPer = 0;
+            TipCustomizes.Text = null;
             personCountOne = 1;
             PersonCountLabelOne.Text = personCountOne.ToString();
 
+            // Parse bill amount
             Bill = Convert.ToDouble(txtBillone.Text);
-            double customTip = 0;
-            if (double.TryParse(TipCustomizes.Text, out customTip))
-            {
-                TipAmount = customTip / 100; // Convert percentage to decimal
-            }
-            else
-            {
-                TipAmount = 0; // Default to 0 if input is invalid
-            }
-            TipAmountPer = Bill * TipAmount;
+
+            // Calculate total bill including custom tip
+            TipAmount = Convert.ToInt32(TipCustomizes.Text); // Assuming TipCustomizes is an integer input
+            
             CurrentBill = (Bill / personCountOne);
             BillPer = CurrentBill;
 
-            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelOne.Text)).ToString("N2")}";
+            // Update UI labels
+            SharePerson.Text = $"₱{((Bill + TipAmount) / personCountOne).ToString("N2")}";
             lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
             lblCurentBill.Text = $"₱{CurrentBill.ToString("n2")}";
             lblTotal.Text = $"₱{BillPer.ToString("n2")}";
-
         }
 
         private void tipsCustomizes_Completed(object sender, EventArgs e)
         {
-            double customTip = 0;
-            if (double.TryParse(TipCustomizes.Text, out customTip))
+            // Parse custom tip as integer
+            if (int.TryParse(TipCustomizes.Text, out int customTip))
             {
-                TipAmount = customTip / 100; // Convert percentage to decimal
+                // Add the integer tip to the bill
+                TipAmount = customTip; // Set the tip amount
+
+                // Calculate the total bill with the tip
+                double totalBill = Bill + TipAmount;
+
+                // Update the UI labels
+                lblTipPerPerson.Text = $"₱{TipAmount.ToString("n2")}";
+                lblTotal.Text = $"₱{totalBill.ToString("n2")}";
+
+                // Update share amount per person
+                if (personCountOne > 0)
+                {
+                    SharePerson.Text = $"₱{(totalBill / personCountOne).ToString("N2")}";
+                }
+                else
+                {
+                    SharePerson.Text = "₱0.00"; // Default value if person count is invalid
+                }
             }
             else
             {
-                TipAmount = 0; // Default to 0 if input is invalid
+                
+                lblTipPerPerson.Text = "₱0.00"; 
+                lblTotal.Text = $"₱{Bill.ToString("n2")}"; 
             }
-            TipAmountPer = (Bill / personCountOne) * TipAmount;
-            CurrentBill = TipAmount / personCountOne;
-            BillPer = TipAmountPer + Bill;
-
-            SharePerson.Text = $"₱{((Bill + TipAmountPer) / double.Parse(PersonCountLabelOne.Text)).ToString("N2")}";
-            lblTipPerPerson.Text = $"₱{TipAmountPer.ToString("n2")}";
-
-            lblTotal.Text = $"₱{BillPer.ToString("n2")}";
-
         }
-        // This method updates bill calculations based on the current values
+
         private void UpdateBillCalculations()
         {
-            // Ensure personCount is greater than zero to avoid division by zero
             if (personCountOne > 0)
             {
-                double customTip = 0;
-
-                // Validate custom tip input
-                if (double.TryParse(TipCustomizes.Text, out customTip))
+                // Validate and parse custom tip input
+                if (int.TryParse(TipCustomizes.Text, out int customTip))
                 {
-                    TipAmount = customTip / 100; // Convert percentage to decimal
+                    TipAmount = customTip; // Use the integer tip directly
                 }
                 else
                 {
                     TipAmount = 0; // Default to 0 if input is invalid
                 }
 
-                double tipAmountPer = Bill * TipAmount;
-                double totalBill = Bill + tipAmountPer;
+                double totalBill = Bill + TipAmount;
 
                 // Validate person count for sharing calculations
                 if (double.TryParse(PersonCountLabelOne.Text, out double personCount) && personCount > 0)
@@ -94,16 +97,13 @@
                     SharePerson.Text = "₱0.00"; // Default value if person count is invalid
                 }
 
-                // Update the UI labels with the calculated amounts
-                lblTipPerPerson.Text = $"₱{tipAmountPer.ToString("n2")}";
+                lblTipPerPerson.Text = $"₱{TipAmount.ToString("n2")}";
                 lblTotal.Text = $"₱{totalBill.ToString("n2")}";
             }
-        
         }
 
         private void OnIncrementClicked(object sender, EventArgs e)
         {
-            // Try to parse the current person count from the Entry
             if (int.TryParse(PersonCountLabelOne.Text, out personCountOne))
             {
                 personCountOne++; // Increment the count
@@ -114,12 +114,11 @@
 
         private void OnDecrementClicked(object sender, EventArgs e)
         {
-            // Try to parse the current person count from the Entry
-            if (int.TryParse(PersonCountLabelOne.Text, out personCountOne) && personCountOne > 0)
+            if (int.TryParse(PersonCountLabelOne.Text, out personCountOne) && personCountOne > 1)
             {
                 personCountOne--; // Decrement the count
                 PersonCountLabelOne.Text = personCountOne.ToString(); // Update the Entry
-                UpdateBillCalculationsTwo(); // Update calculations here after decrementing
+                UpdateBillCalculations(); // Update calculations here after decrementing
             }
         }
 
