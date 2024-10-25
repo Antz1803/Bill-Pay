@@ -24,12 +24,8 @@
 
             // Parse bill amount
             Bill = Convert.ToDouble(txtBillone.Text);
-<<<<<<< HEAD
-
             // Calculate total bill including custom tip
             TipAmount = Convert.ToInt32(TipCustomizes.Text); // Assuming TipCustomizes is an integer input
-            
-=======
             double customTip = 0;
             if (double.TryParse(TipCustomizes.Text, out customTip))
             {
@@ -40,7 +36,6 @@
                 TipAmount = 0; // Default to 0 if input is invalid
             }
             TipAmountPer = Bill + TipAmount;
->>>>>>> b80f78f20b30566b365c0114056303e71012c764
             CurrentBill = (Bill / personCountOne);
             BillPer = CurrentBill;
 
